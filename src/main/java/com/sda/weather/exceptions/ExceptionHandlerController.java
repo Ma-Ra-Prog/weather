@@ -12,7 +12,13 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(NoCountryOrCityExcepton.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    void noCityOrCountryHandler(NoCountryOrCityExcepton exception) {
+    void noCountryOrCityHandler(NoCountryOrCityExcepton exception) {
+        log.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(BlankCountryOrCityException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    void blankCountryOrCityHandler(BlankCountryOrCityException exception) {
         log.error(exception.getMessage());
     }
 

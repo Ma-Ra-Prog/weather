@@ -1,5 +1,6 @@
 package com.sda.weather.localization;
 
+import com.sda.weather.exceptions.BlankCountryOrCityException;
 import com.sda.weather.exceptions.NoCountryOrCityExcepton;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +23,7 @@ class LocalizationCreateServiceTest {
     LocalizationCreateService localizationCreateService;
 
     @Test
-    void createNewLocalization_thenCreatesANewLocalization(){
+    void createNewLocalization_thenCreatesANewLocalization() {
         //given
         when(localizationRepository.save(any(Localization.class))).thenReturn(new Localization());
         LocalizationDefinition localizationDefinition = LocalizationDefinition.builder()
@@ -75,7 +76,24 @@ class LocalizationCreateServiceTest {
         Throwable throwable = catchThrowable(() -> localizationCreateService.createNewLocalization(localizationDefinition));
 
         //then
-        assertThat(throwable).isInstanceOf(NoCountryOrCityExcepton.class);
+        assertThat(throwable).isInstanceOf(BlankCountryOrCityException.class);
         verify(localizationRepository, times(0)).save(any(Localization.class));
+    }
+
+    @Test
+    void validateCountryOrCityName_thenReturnTrue() {
+        assertThat(localizationCreateService.countryOrCityNameValidator("Gdańsk")).isTrue();
+        assertThat(localizationCreateService.countryOrCityNameValidator("Polska")).isTrue();
+        assertThat(localizationCreateService.countryOrCityNameValidator("PL")).isTrue();
+        assertThat(localizationCreateService.countryOrCityNameValidator("Polska Rzeczpospolita Ludowa")).isTrue();
+    }
+
+    @Test
+    void validateCountryOrCityName_whenCityNameIsInvalid_thenReturnFalse() {
+        assertThat(localizationCreateService.countryOrCityNameValidator("Gd@ń5k")).isFalse();
+        assertThat(localizationCreateService.countryOrCityNameValidator("     Gdańsk")).isFalse();
+        assertThat(localizationCreateService.countryOrCityNameValidator("Gda     ńsk")).isFalse();
+        assertThat(localizationCreateService.countryOrCityNameValidator("Gda----ńsk")).isFalse();
+
     }
 }
