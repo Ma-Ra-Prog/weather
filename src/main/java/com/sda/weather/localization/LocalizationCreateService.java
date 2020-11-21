@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LocalizationService {
+public class LocalizationCreateService {
 
     final LocalizationRepository localizationRepository;
 
@@ -20,15 +20,15 @@ public class LocalizationService {
 
         if (cityName.isEmpty() || countryName.isEmpty()) {
             throw new NoCountryOrCityExcepton("Country or city shouldn't be empty!");
-        } else if (latitude>90f || latitude<-90f){
+        } else if (latitude > 90f || latitude < -90f) {
             throw new IllegalParameterValueException("latitude value: " + latitude);
-        } else if (longitude>90f || longitude<-90f){
+        } else if (longitude > 90f || longitude < -90f) {
             throw new IllegalParameterValueException("longitude value: " + longitude);
         }
 
         Localization localization = new Localization();
         localization.setCityName(cityName);
-        localization.setCityName(countryName);
+        localization.setCityName(countryName);  // todo localization.setCountry()
         localization.setLatitude(latitude);
         localization.setLongitude(longitude);
         localization.setRegion(region);

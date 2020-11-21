@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LocalizationController {
 
-    private final LocalizationService localizationService;
+    private final LocalizationCreateService localizationCreateService;
     private final LocalizationFetchService localizationFetchService;
     private final LocalizationMapper localizationMapper;
 
     @PostMapping("/localization")
     ResponseEntity<LocalizationDto> createLocalisation(@RequestBody LocalizationDto localisationDto) {
         LocalizationDefinition localizationDefinition = localizationMapper.mapToLocalizationDefinition(localisationDto);
-        Localization createdNewLocalization = localizationService.createNewLocalization(localizationDefinition);
+        Localization createdNewLocalization = localizationCreateService.createNewLocalization(localizationDefinition);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(localizationMapper.mapToLocalizationDto(createdNewLocalization));
