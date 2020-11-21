@@ -80,20 +80,4 @@ class LocalizationCreateServiceTest {
         verify(localizationRepository, times(0)).save(any(Localization.class));
     }
 
-    @Test
-    void validateCountryOrCityName_thenReturnTrue() {
-        assertThat(localizationCreateService.countryOrCityNameValidator("Gdańsk")).isTrue();
-        assertThat(localizationCreateService.countryOrCityNameValidator("Polska")).isTrue();
-        assertThat(localizationCreateService.countryOrCityNameValidator("PL")).isTrue();
-        assertThat(localizationCreateService.countryOrCityNameValidator("Polska Rzeczpospolita Ludowa")).isTrue();
-    }
-
-    @Test
-    void validateCountryOrCityName_whenCityNameIsInvalid_thenReturnFalse() {
-        assertThat(localizationCreateService.countryOrCityNameValidator("Gd@ń5k")).isFalse();
-        assertThat(localizationCreateService.countryOrCityNameValidator("     Gdańsk")).isFalse();
-        assertThat(localizationCreateService.countryOrCityNameValidator("Gda     ńsk")).isFalse();
-        assertThat(localizationCreateService.countryOrCityNameValidator("Gda----ńsk")).isFalse();
-
-    }
 }
