@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(NoCountryOrCityExcepton.class)
+    @ExceptionHandler(NoCountryOrCityException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    void noCountryOrCityHandler(NoCountryOrCityExcepton exception) {
+    void noCountryOrCityHandler(NoCountryOrCityException exception) {
         log.error(exception.getMessage());
     }
 
-    @ExceptionHandler(BlankCountryOrCityException.class)
+    @ExceptionHandler(InvalidCountryOrCityException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    void blankCountryOrCityHandler(BlankCountryOrCityException exception) {
+    void invalidCountryOrCityHandler(InvalidCountryOrCityException exception) {
         log.error(exception.getMessage());
     }
 

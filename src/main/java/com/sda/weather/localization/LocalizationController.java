@@ -6,6 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -28,5 +31,15 @@ public class LocalizationController {
     LocalizationDto getLocalization(@PathVariable Long id) {
         Localization localization = localizationFetchService.fetchLocalization(id);
         return localizationMapper.mapToLocalizationDto(localization);
+    }
+
+    @GetMapping("/localization")
+    ResponseEntity<List<LocalizationDto>> getAllLocalization(){
+        List<LocalizationDto> localizationDtoList = localizationFetchService
+                .fetchAllLocalisations()
+                .stream()
+                .map(localizationMapper::mapToLocalizationDto)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(localizationDtoList);
     }
 }

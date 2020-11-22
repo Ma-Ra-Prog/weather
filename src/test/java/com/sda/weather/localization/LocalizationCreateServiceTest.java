@@ -1,7 +1,7 @@
 package com.sda.weather.localization;
 
-import com.sda.weather.exceptions.BlankCountryOrCityException;
-import com.sda.weather.exceptions.NoCountryOrCityExcepton;
+import com.sda.weather.exceptions.InvalidCountryOrCityException;
+import com.sda.weather.exceptions.NoCountryOrCityException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -29,8 +29,8 @@ class LocalizationCreateServiceTest {
         LocalizationDefinition localizationDefinition = LocalizationDefinition.builder()
                 .cityName("Gdańsk")
                 .countryName("Polska")
-                .latitude(54.356030f)
-                .longitude(180.000f)
+                .latitude(54.356030d)
+                .longitude(180.000d)
                 .region("Pomorskie")
                 .build();
 
@@ -48,8 +48,8 @@ class LocalizationCreateServiceTest {
         LocalizationDefinition localizationDefinition = LocalizationDefinition.builder()
                 .cityName("")
                 .countryName("Polska")
-                .latitude(54.356030f)
-                .longitude(18.646120f)
+                .latitude(54.356030d)
+                .longitude(18.646120d)
                 .region("Pomorskie")
                 .build();
 
@@ -57,7 +57,7 @@ class LocalizationCreateServiceTest {
         Throwable throwable = catchThrowable(() -> localizationCreateService.createNewLocalization(localizationDefinition));
 
         //then
-        assertThat(throwable).isInstanceOf(NoCountryOrCityExcepton.class);
+        assertThat(throwable).isInstanceOf(NoCountryOrCityException.class);
         verify(localizationRepository, times(0)).save(any(Localization.class));
     }
 
@@ -67,8 +67,8 @@ class LocalizationCreateServiceTest {
         LocalizationDefinition localizationDefinition = LocalizationDefinition.builder()
                 .cityName(" ")
                 .countryName("Polska")
-                .latitude(54.356030f)
-                .longitude(18.646120f)
+                .latitude(54.356030d)
+                .longitude(18.646120d)
                 .region("Pomorskie")
                 .build();
 
@@ -76,7 +76,7 @@ class LocalizationCreateServiceTest {
         Throwable throwable = catchThrowable(() -> localizationCreateService.createNewLocalization(localizationDefinition));
 
         //then
-        assertThat(throwable).isInstanceOf(BlankCountryOrCityException.class);
+        assertThat(throwable).isInstanceOf(InvalidCountryOrCityException.class);
         verify(localizationRepository, times(0)).save(any(Localization.class));
     }
 

@@ -8,8 +8,8 @@ import lombok.Getter;
 public class LocalizationDefinition {
     private String cityName;
     private String countryName;
-    private float latitude;
-    private float longitude;
+    private double latitude;
+    private double longitude;
     private String region;
 
 }

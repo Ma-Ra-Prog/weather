@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.Instant;
+import java.util.Optional;
 
 @Entity
 @Data
@@ -16,8 +17,11 @@ public class Localization {
     Long id;
     String cityName;
     String countryName;
-    float longitude;
-    float latitude;
+    double latitude;
+    double longitude;
     String region;
-    Instant creationDate;
+
+    public Optional<String> getRegion() {
+        return Optional.ofNullable(region);
+    }
 }
