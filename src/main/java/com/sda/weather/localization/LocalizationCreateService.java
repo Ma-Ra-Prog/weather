@@ -18,9 +18,7 @@ public class LocalizationCreateService {
         localization.setCountryName(localizationDefinition.getCountryName());
         localization.setLatitude(localizationDefinition.getLatitude());
         localization.setLongitude(localizationDefinition.getLongitude());
-        if (!localizationDefinition.getRegion().get().isBlank()) {              // todo it may throw an exception
-            localization.setRegion(localizationDefinition.getRegion().get());
-        }
+        localization.setRegion(localizationDefinition.getRegion().orElse(null));
 
         return localizationRepository.save(localization);
     }

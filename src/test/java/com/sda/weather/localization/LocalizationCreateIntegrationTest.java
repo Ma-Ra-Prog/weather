@@ -227,7 +227,7 @@ public class LocalizationCreateIntegrationTest {
     }
 
     @Test
-    void createNewLocalization_whenRegionIsNull_thenThrowIllegalParameterValueExceptionAndReturn400StatusCode() throws Exception {
+    void createNewLocalization_whenRegionIsNull_thenCreatesNewLocalizationAndReturn201StatusCode() throws Exception {
         // given
         localizationRepository.deleteAll();
         LocalizationDto localizationDto = new LocalizationDto().builder()
@@ -249,6 +249,6 @@ public class LocalizationCreateIntegrationTest {
 
         //then
         MockHttpServletResponse response = result.getResponse();
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
     }
 }
