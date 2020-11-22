@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @Component
 public class LocalizationInputValidator {
 
-    void isInputDataCorrect(LocalizationDefinition localizationDefinition){
+    void isInputDataCorrect(LocalizationDefinition localizationDefinition) {
         if (!isCityNameNotEmpty(localizationDefinition.getCityName())) {
             throw new NoCountryOrCityException("City name shouldn't be empty!");
         } else if (!isCountryNameNotEmpty(localizationDefinition.getCountryName())) {
@@ -42,10 +42,10 @@ public class LocalizationInputValidator {
     }
 
     boolean isLatitudeCorrect(double value) {
-        return !(value > 90f) && !(value < -90f);
+        return !(value > 90d) && !(value < -90d);
     }
 
     boolean isLongitudeCorrect(double value) {
-        return !(value > 180f) && !(value < -180f);
+        return !(value > 180d) && !(value < -180d);
     }
 }

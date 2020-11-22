@@ -14,12 +14,12 @@ import java.util.Optional;
 public class Localization {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String cityName;
-    String countryName;
-    double latitude;
-    double longitude;
-    String region;
+    private Long id;
+    private String cityName;
+    private String countryName;
+    private double latitude;
+    private double longitude;
+    private String region;
 
     public Optional<String> getRegion() {
         return Optional.ofNullable(region);

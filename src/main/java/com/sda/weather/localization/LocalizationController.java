@@ -34,7 +34,7 @@ public class LocalizationController {
     }
 
     @GetMapping("/localization")
-    ResponseEntity<List<LocalizationDto>> getAllLocalization(){
+    ResponseEntity<List<LocalizationDto>> getAllLocalization() {
         List<LocalizationDto> localizationDtoList = localizationFetchService
                 .fetchAllLocalisations()
                 .stream()

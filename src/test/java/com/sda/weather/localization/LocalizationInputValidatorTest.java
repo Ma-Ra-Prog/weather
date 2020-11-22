@@ -64,29 +64,29 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void validateCityName_thenReturnTrue(){
+    void validateCityName_thenReturnTrue() {
         assertThat(localizationInputValidator.isCityNameNotEmpty("Gdańsk")).isTrue();
     }
 
     @Test
-    void validateCityName_whenNameIsEmpty_thenReturnFalse(){
+    void validateCityName_whenNameIsEmpty_thenReturnFalse() {
         assertThat(localizationInputValidator.isCityNameNotEmpty("")).isFalse();
     }
 
     @Test
-    void validateCountryName_thenReturnTrue(){
+    void validateCountryName_thenReturnTrue() {
         assertThat(localizationInputValidator.isCountryNameNotEmpty("Polska Rzeczpospolita Ludowa")).isTrue();
     }
 
     @Test
-    void validateCountryName_whenNameIsEmpty_thenReturnFalse(){
+    void validateCountryName_whenNameIsEmpty_thenReturnFalse() {
         assertThat(localizationInputValidator.isCountryNameNotEmpty("")).isFalse();
     }
 
     @Test
-    void isInputDataCorrect_whenCityNameIsEmpty_thenThrowNoCountryOrCityException(){
+    void isInputDataCorrect_whenCityNameIsEmpty_thenThrowNoCountryOrCityException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("","Polska",54.356030d,180.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("", "Polska", 54.356030d, 180.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
@@ -94,9 +94,9 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void isInputDataCorrect_whenCountryNameIsEmpty_thenThrowNoCountryOrCityException(){
+    void isInputDataCorrect_whenCountryNameIsEmpty_thenThrowNoCountryOrCityException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk","",54.356030d,180.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk", "", 54.356030d, 180.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
@@ -104,9 +104,9 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void isInputDataCorrect_whenCityNameIsInvalid_thenThrowInvalidCountryOrCityException(){
+    void isInputDataCorrect_whenCityNameIsInvalid_thenThrowInvalidCountryOrCityException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("   Jaka śna zwa","Polska",54.356030d,180.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("   Jaka śna zwa", "Polska", 54.356030d, 180.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
@@ -114,9 +114,9 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void isInputDataCorrect_whenCountryNameIsInvalid_thenThrowInvalidCountryOrCityException(){
+    void isInputDataCorrect_whenCountryNameIsInvalid_thenThrowInvalidCountryOrCityException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk","   Pol  ska",54.356030d,180.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk", "   Pol  ska", 54.356030d, 180.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
@@ -124,9 +124,9 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void isInputDataCorrect_whenLatitudeIsOutOfBound_thenThrowIllegalParameterValueException(){
+    void isInputDataCorrect_whenLatitudeIsOutOfBound_thenThrowIllegalParameterValueException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk","Polska",200d,180.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk", "Polska", 200d, 180.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
@@ -134,9 +134,9 @@ class LocalizationInputValidatorTest {
     }
 
     @Test
-    void isInputDataCorrect_whenLongitudeIsOutOfBound_thenThrowIllegalParameterValueException(){
+    void isInputDataCorrect_whenLongitudeIsOutOfBound_thenThrowIllegalParameterValueException() {
         //given
-        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk","Polska",54.356030d,200.000d,"Pomorskie");
+        LocalizationDefinition localizationDefinition = new LocalizationDefinition("Gdańsk", "Polska", 54.356030d, 200.000d, "Pomorskie");
         //when
         Throwable throwable = catchThrowable(() -> localizationInputValidator.isInputDataCorrect(localizationDefinition));
         //then
