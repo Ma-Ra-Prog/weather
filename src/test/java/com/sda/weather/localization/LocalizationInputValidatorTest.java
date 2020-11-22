@@ -18,6 +18,11 @@ class LocalizationInputValidatorTest {
         assertThat(localizationInputValidator.isFormatCorrect("Polska")).isTrue();
         assertThat(localizationInputValidator.isFormatCorrect("PL")).isTrue();
         assertThat(localizationInputValidator.isFormatCorrect("Polska Rzeczpospolita Ludowa")).isTrue();
+        assertThat(localizationInputValidator.isFormatCorrect("Düsseldorf")).isTrue();
+        assertThat(localizationInputValidator.isFormatCorrect("Świnoujście")).isTrue();
+        assertThat(localizationInputValidator.isFormatCorrect("Düsseldorf")).isTrue();
+        assertThat(localizationInputValidator.isFormatCorrect("Rødovre")).isTrue();
+        assertThat(localizationInputValidator.isFormatCorrect("Östergötland")).isTrue();
     }
 
     @Test

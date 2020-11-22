@@ -45,10 +45,10 @@ public class LocalizationCreateIntegrationTest {
         MockHttpServletRequestBuilder post = post("/localization")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(localizationDto));
+
         // when
-        MvcResult result = mockMvc
-                .perform(post)
-                .andReturn();
+        MvcResult result = mockMvc.perform(post).andReturn();
+
         //then
         MockHttpServletResponse response = result.getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
@@ -224,5 +224,31 @@ public class LocalizationCreateIntegrationTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
         List<Localization> localizations = localizationRepository.findAll();
         assertThat(localizations.size()).isEqualTo(0);
+    }
+
+    @Test
+    void createNewLocalization_whenRegionIsNull_thenThrowIllegalParameterValueExceptionAndReturn400StatusCode() throws Exception {
+        // given
+        localizationRepository.deleteAll();
+        LocalizationDto localizationDto = new LocalizationDto().builder()
+                .id(null)
+                .cityName("Gdańsk")
+                .countryName("Polska")
+                .latitude(54.356030d)
+                .longitude(55.00d)
+                .build();
+
+        MockHttpServletRequestBuilder post = post("/localization")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(localizationDto));
+
+        // when
+        MvcResult result = mockMvc
+                .perform(post)
+                .andReturn();
+
+        //then
+        MockHttpServletResponse response = result.getResponse();
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 }

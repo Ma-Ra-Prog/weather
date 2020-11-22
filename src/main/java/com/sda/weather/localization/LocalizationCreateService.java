@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LocalizationCreateService {
 
-    final LocalizationRepository localizationRepository;
+    private final LocalizationRepository localizationRepository;
     private final LocalizationInputValidator localizationInputValidator = new LocalizationInputValidator();
 
     public Localization createNewLocalization(LocalizationDefinition localizationDefinition) {
@@ -18,7 +18,7 @@ public class LocalizationCreateService {
         localization.setCountryName(localizationDefinition.getCountryName());
         localization.setLatitude(localizationDefinition.getLatitude());
         localization.setLongitude(localizationDefinition.getLongitude());
-        if (!localizationDefinition.getRegion().get().isBlank()) {
+        if (!localizationDefinition.getRegion().get().isBlank()) {              // todo it may throw an exception
             localization.setRegion(localizationDefinition.getRegion().get());
         }
 

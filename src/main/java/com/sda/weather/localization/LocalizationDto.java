@@ -12,13 +12,11 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocalizationDto {
+
     Long id;
     String cityName;
     String countryName;
     double latitude;
     double longitude;
     String region;
-    public Optional<String> getRegion() {
-        return Optional.ofNullable(region);
-    }
 }
