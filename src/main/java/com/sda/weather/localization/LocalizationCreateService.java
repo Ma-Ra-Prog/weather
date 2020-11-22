@@ -6,15 +6,12 @@ import com.sda.weather.exceptions.NoCountryOrCityExcepton;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 @Service
 @RequiredArgsConstructor
 public class LocalizationCreateService {
 
     final LocalizationRepository localizationRepository;
+    private LocalizationInputValidator localizationInputValidator = new LocalizationInputValidator();
 
     public Localization createNewLocalization(LocalizationDefinition localizationDefinition) {
         String countryName = localizationDefinition.getCountryName();
@@ -25,11 +22,11 @@ public class LocalizationCreateService {
 
         if (cityName.isEmpty() || countryName.isEmpty()) {
             throw new NoCountryOrCityExcepton("Country or city shouldn't be empty!");
-        } else if (!countryOrCityNameValidator(cityName) || !countryOrCityNameValidator(countryName)) {
+        } else if (!localizationInputValidator.isFormatCorrect(cityName) || !localizationInputValidator.isFormatCorrect(countryName)) {
             throw new BlankCountryOrCityException("Country or city shouldn't be blank!");
-        } else if (latitude > 90f || latitude < -90f) {
+        } else if (!localizationInputValidator.isLatitudeCorrect(latitude)) {
             throw new IllegalParameterValueException("latitude value: " + latitude);
-        } else if (longitude > 180f || longitude < -180f) {
+        } else if (!localizationInputValidator.isLongitudeCorrect(longitude)) {
             throw new IllegalParameterValueException("longitude value: " + longitude);
         }
 
@@ -41,12 +38,6 @@ public class LocalizationCreateService {
         localization.setRegion(region);
 
         return localizationRepository.save(localization);
-    }
-
-    boolean countryOrCityNameValidator(String name) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z\\u0080-\\u024F]+(?:([\\ \\-\\']|(\\.\\ ))[a-zA-Z\\u0080-\\u024F]+)*$");
-        Matcher matcher = pattern.matcher(name);
-        return matcher.matches();
     }
 
 }
