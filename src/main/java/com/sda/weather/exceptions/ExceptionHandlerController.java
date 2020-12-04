@@ -33,4 +33,17 @@ public class ExceptionHandlerController {
     void notFoundExceptionHandler(NotFoundException exception) {
         log.error(exception.getMessage());
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    void badRequestHandler(BadRequestException exception) {
+        log.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(JsonDataProcessingErrorException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    void jsonDataProcessingErrorHandler(JsonDataProcessingErrorException exception) {
+        log.error(exception.getMessage());
+    }
+
 }
