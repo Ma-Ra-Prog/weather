@@ -17,7 +17,7 @@ public class LocalizationFetchService {
                 .orElseThrow(() -> new NotFoundException("Nie znaleziono lokalizacji o id: " + id));
     }
 
-    public List<Localization> fetchAllLocalisations() {
+    List<Localization> fetchAllLocalisations() {
         return localizationRepository.findAll();
     }
 }

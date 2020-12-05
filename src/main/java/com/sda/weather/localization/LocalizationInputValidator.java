@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component
-public class LocalizationInputValidator {
+class LocalizationInputValidator {
 
     void isInputDataCorrect(LocalizationDefinition localizationDefinition) {
         if (!isCityNameNotEmpty(localizationDefinition.getCityName())) {

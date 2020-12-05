@@ -1,4 +1,4 @@
-package com.sda.weather.weather;
+package com.sda.weather.forecast;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +15,14 @@ public class ForecastMapper {
                 .temperature(newForecast.getTemperature())
                 .airPressure(newForecast.getAirPressure())
                 .humidity(newForecast.getHumidity())
-                .windDirection(newForecast.getWindDirection())
+                .windDegree(newForecast.getWindDegree())
                 .windSpeed(newForecast.getWindSpeed())
                 .build();
+    }
+
+    String mapWindDegreeToWindDirection(String degree){
+        double doubleDegree = Double.parseDouble(degree);
+        return null; //todo: zrobić mapper zmieniający kąt wiatru na kierunek wg tego rozkładu http://snowfence.umn.edu/Components/winddirectionanddegrees.htm
+        //todo: dodać windDirection do klas pogodowych
     }
 }

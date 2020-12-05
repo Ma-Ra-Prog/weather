@@ -1,18 +1,17 @@
-package com.sda.weather.weather;
+package com.sda.weather.forecast;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties("com.sda.weather.openweathermap-api")
+@Configuration
+@ConfigurationProperties(prefix = "com.sda.weather.openweathermap-api")
 public class OpenWeatherConfig {
 
-    private String apiKey;
-    private String uri;
-    private String units;
-    private String lang;
+    private String appid;
 }

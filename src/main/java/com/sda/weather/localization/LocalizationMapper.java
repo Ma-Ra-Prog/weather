@@ -3,7 +3,7 @@ package com.sda.weather.localization;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocalizationMapper {
+class LocalizationMapper {
 
     LocalizationDto mapToLocalizationDto(Localization localization) {
         return new LocalizationDto().builder()

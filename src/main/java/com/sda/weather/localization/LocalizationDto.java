@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LocalizationDto {
+class LocalizationDto {
 
     Long id;
     String cityName;

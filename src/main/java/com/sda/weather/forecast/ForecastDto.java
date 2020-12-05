@@ -1,4 +1,4 @@
-package com.sda.weather.weather;
+package com.sda.weather.forecast;
 
 import lombok.Data;
 import lombok.Builder;
@@ -14,6 +14,7 @@ public class ForecastDto {
     String temperature;
     String airPressure;
     String humidity;
-    String windDirection;
+    String windDegree;
     String windSpeed;
+    String date; //todo: LocalDateTime
 }

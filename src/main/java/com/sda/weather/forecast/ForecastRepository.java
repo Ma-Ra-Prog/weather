@@ -1,4 +1,4 @@
-package com.sda.weather.weather;
+package com.sda.weather.forecast;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

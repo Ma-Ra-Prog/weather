@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LocalizationCreateService {
+class LocalizationCreateService {
 
     private final LocalizationRepository localizationRepository;
     private final LocalizationInputValidator localizationInputValidator = new LocalizationInputValidator();
 
-    public Localization createNewLocalization(LocalizationDefinition localizationDefinition) {
+    Localization createNewLocalization(LocalizationDefinition localizationDefinition) {
         localizationInputValidator.isInputDataCorrect(localizationDefinition);
 
         Localization localization = new Localization();

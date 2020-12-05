@@ -27,7 +27,8 @@ public class LocalizationCreateIntegrationTest {
     @Autowired
     LocalizationRepository localizationRepository;
 
-    ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    ObjectMapper objectMapper;
 
     @Test
     void createNewLocalization_thenCreatesNewLocalizationAndReturn201StatusCode() throws Exception {
