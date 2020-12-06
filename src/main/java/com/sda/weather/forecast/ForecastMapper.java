@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 public class ForecastMapper {
 
-    ForecastDto mapToForecastDto(Forecast newForecast){
+    ForecastDto mapToForecastDto(Forecast newForecast) {
         return ForecastDto.builder()
                 .id(newForecast.getId())
                 .temperature(newForecast.getTemperature())
@@ -20,7 +20,7 @@ public class ForecastMapper {
                 .build();
     }
 
-    String mapWindDegreeToWindDirection(String degree){
+    String mapWindDegreeToWindDirection(String degree) {
         double doubleDegree = Double.parseDouble(degree);
         return null; //todo: zrobić mapper zmieniający kąt wiatru na kierunek wg tego rozkładu http://snowfence.umn.edu/Components/winddirectionanddegrees.htm
         //todo: dodać windDirection do klas pogodowych

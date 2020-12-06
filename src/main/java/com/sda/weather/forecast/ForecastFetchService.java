@@ -32,7 +32,7 @@ public class ForecastFetchService {
 
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
 
-        if (!entity.getStatusCode().is2xxSuccessful()){
+        if (!entity.getStatusCode().is2xxSuccessful()) {
             throw new BadRequestException("Unable to get data from service.");
         }
 
