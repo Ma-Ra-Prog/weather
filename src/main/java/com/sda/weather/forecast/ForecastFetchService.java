@@ -21,7 +21,7 @@ public class ForecastFetchService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
-    public Forecast getForecast(Long id, String period) {
+    public Forecast getForecast(Long id, Integer period) {
         Localization localization = localizationFetchService.fetchLocalization(id);
         String url = UriComponentsBuilder.newInstance()
                 .scheme("http")

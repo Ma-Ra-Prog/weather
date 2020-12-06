@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Validated
 class LocalizationController {
 
     private final LocalizationCreateService localizationCreateService;
