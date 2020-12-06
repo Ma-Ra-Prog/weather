@@ -8,19 +8,29 @@ import java.util.List;
 @Data
 public class ForecastOpenWeatherResponse {
 
-    private int cnt;
-    private String cod;
-    private CityResponse city;
     private List<SingleForecast> list;
-
-    @Data
-    public static class CityResponse {
-        private String name;
-    }
 
     @Data
     public static class SingleForecast {
         @JsonProperty("dt_txt")
         private String date;
+        private Wind wind;
+        @JsonProperty("main")
+        private Weather weather;
+    }
+
+    @Data
+    public static class Wind {
+        private int speed;
+        @JsonProperty("deg")
+        private float degree;
+    }
+
+    @Data
+    public static class Weather {
+        @JsonProperty("temp")
+        private float temperature;
+        private int pressure;
+        private int humidity;
     }
 }

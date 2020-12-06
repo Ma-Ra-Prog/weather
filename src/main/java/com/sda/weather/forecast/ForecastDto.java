@@ -1,5 +1,6 @@
 package com.sda.weather.forecast;
 
+import com.sda.weather.localization.Localization;
 import lombok.Data;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,12 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ForecastDto {
-    Long id;                // todo unnecessary
-    String temperature;
-    String airPressure;
-    String humidity;
-    String windDegree;      // todo windDirection
-    String windSpeed;
+    float temperature;
+    int airPressure;
+    int humidity;
+    float windDegree;
+    String windDirection;
+    int windSpeed;
     String date;           //todo: LocalDateTime
+    Localization localization;
 }

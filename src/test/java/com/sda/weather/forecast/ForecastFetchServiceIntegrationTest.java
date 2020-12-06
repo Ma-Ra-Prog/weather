@@ -42,7 +42,7 @@ public class ForecastFetchServiceIntegrationTest {
     void getForecast_returnsCorrectForecastAndStatusCode200() throws Exception {
         // given
         Long id = savedLocalization.getId();
-        MockHttpServletRequestBuilder request = get("/localization/"+id+"/forecast")
+        MockHttpServletRequestBuilder request = get("/localization/"+id+"/forecast?period=1")
                 .contentType(MediaType.APPLICATION_JSON);
 
         // when
@@ -62,6 +62,6 @@ public class ForecastFetchServiceIntegrationTest {
         // when
         MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
         // then
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.NOT_FOUND.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 }

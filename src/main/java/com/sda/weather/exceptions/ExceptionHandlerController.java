@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.validation.ConstraintViolationException;
+
 @Slf4j
 @ControllerAdvice
 public class ExceptionHandlerController {
@@ -13,6 +15,12 @@ public class ExceptionHandlerController {
     @ExceptionHandler(NoCountryOrCityException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     void noCountryOrCityHandler(NoCountryOrCityException exception) {
+        log.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    void constraintViolationHandler(ConstraintViolationException exception) {
         log.error(exception.getMessage());
     }
 
@@ -41,7 +49,7 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(JsonDataProcessingErrorException.class)
-    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     void jsonDataProcessingErrorHandler(JsonDataProcessingErrorException exception) {
         log.error(exception.getMessage());
     }

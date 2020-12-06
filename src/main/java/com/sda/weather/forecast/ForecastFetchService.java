@@ -20,14 +20,18 @@ public class ForecastFetchService {
     private final OpenWeatherConfig openWeatherConfig;
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
+    private final ForecastMapper forecastMapper;
+    private final ForecastRepository forecastRepository;
 
     public Forecast getForecast(Long id, Integer period) {
         Localization localization = localizationFetchService.fetchLocalization(id);
+
         String url = UriComponentsBuilder.newInstance()
                 .scheme("http")
                 .host("api.openweathermap.org/data/2.5/forecast")
                 .queryParam("q", localization.getCityName())
                 .queryParam("appid", openWeatherConfig.getAppid())
+                .queryParam("units", "metric")
                 .build().toUriString();
 
         ResponseEntity<String> entity = restTemplate.getForEntity(url, String.class);
@@ -37,19 +41,32 @@ public class ForecastFetchService {
         }
 
         String response = entity.getBody();
+        ForecastOpenWeatherResponse forecastResponse;
 
         try {
-            ForecastOpenWeatherResponse forecast = objectMapper.readValue(response, ForecastOpenWeatherResponse.class);
+            forecastResponse = objectMapper.readValue(response, ForecastOpenWeatherResponse.class);
         } catch (JsonProcessingException e) {
             throw new JsonDataProcessingErrorException("Unable to process forecast data from Json");
         }
 
-        // todo: zapis do bazy danych
+        ForecastDto forecastDto = forecastMapper.mapToForecastDto(forecastResponse, localization, period);
 
-        return new Forecast();
+        Forecast forecast = new Forecast();
+        forecast.setTemperature(forecastDto.getTemperature());
+        forecast.setAirPressure(forecastDto.getAirPressure());
+        forecast.setHumidity(forecastDto.getHumidity());
+        forecast.setWindDegree(forecastDto.getWindDegree());
+        forecast.setWindDirection(forecastDto.getWindDirection());
+        forecast.setWindSpeed(forecastDto.getWindSpeed());
+        forecast.setDate(forecastDto.getDate());
+        forecast.setLocalization(forecastDto.getLocalization());
+        forecastRepository.save(forecast);
+
+        return forecast;
     }
 
     public Forecast getForecastWithCityNameAndDate(String cityName, int period) {
+        // todo: wypełnić metodę po opracowaniu poprzedniej
         return null;
     }
 }
