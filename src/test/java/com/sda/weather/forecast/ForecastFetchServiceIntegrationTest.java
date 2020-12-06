@@ -35,19 +35,19 @@ public class ForecastFetchServiceIntegrationTest {
         localization.setCountryName("Poland");
         localization.setLatitude(50);
         localization.setLongitude(40);
-        Localization savedLocalization = localizationRepository.save(localization);
+        savedLocalization = localizationRepository.save(localization);
     }
 
     @Test
     void getForecast_returnsCorrectForecastAndStatusCode200() throws Exception {
         // given
-
         Long id = savedLocalization.getId();
-
         MockHttpServletRequestBuilder request = get("/localization/"+id+"/forecast")
                 .contentType(MediaType.APPLICATION_JSON);
+
         // when
         MockHttpServletResponse response = mockMvc.perform(request).andReturn().getResponse();
+
         // then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
