@@ -26,7 +26,6 @@ public class ForecastMapper {
                 .windDirection(newForecast.getWindDirection())
                 .windSpeed(newForecast.getWindSpeed())
                 .forecastDate(instantToStringFormatter(newForecast.getForecastDate()))
-                .localization((newForecast.getLocalization()))
                 .build();
     }
 

@@ -1,12 +1,9 @@
 package com.sda.weather.forecast;
 
-import com.sda.weather.localization.Localization;
-import lombok.Data;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-
-import java.time.Instant;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
