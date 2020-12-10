@@ -20,5 +20,4 @@ public class ForecastDto {
     String windDirection;
     float windSpeed;
     String forecastDate;
-    Localization localization;
 }
