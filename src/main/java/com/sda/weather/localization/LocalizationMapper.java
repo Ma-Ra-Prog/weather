@@ -22,7 +22,7 @@ class LocalizationMapper {
                 .countryName(localizationDto.getCountryName())
                 .latitude(localizationDto.getLatitude())
                 .longitude(localizationDto.getLongitude())
-                .region(localizationDto.getRegion())
+                .region(localizationDto.getRegion().orElseGet(null))
                 .build();
     }
 }

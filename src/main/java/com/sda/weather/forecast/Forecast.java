@@ -4,6 +4,7 @@ import com.sda.weather.localization.Localization;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -16,8 +17,9 @@ public class Forecast {
     int humidity;
     float windDegree;
     String windDirection;
-    int windSpeed;
-    String date;
+    float windSpeed;
+    Instant forecastDate;
+    Instant creationDate;
     @ManyToOne
     Localization localization;
 }

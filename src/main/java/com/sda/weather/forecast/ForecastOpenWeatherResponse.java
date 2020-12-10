@@ -21,7 +21,7 @@ public class ForecastOpenWeatherResponse {
 
     @Data
     public static class Wind {
-        private int speed;
+        private float speed;
         @JsonProperty("deg")
         private float degree;
     }

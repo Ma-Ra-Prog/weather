@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Optional;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,4 +19,8 @@ class LocalizationDto {
     double latitude;
     double longitude;
     String region;
+
+    public Optional<String> getRegion() {
+        return Optional.ofNullable(region);
+    }
 }

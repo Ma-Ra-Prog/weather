@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.time.Instant;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,7 +18,7 @@ public class ForecastDto {
     int humidity;
     float windDegree;
     String windDirection;
-    int windSpeed;
-    String date;           //todo: LocalDateTime
+    float windSpeed;
+    String forecastDate;
     Localization localization;
 }

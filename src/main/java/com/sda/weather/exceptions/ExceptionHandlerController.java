@@ -1,5 +1,6 @@
 package com.sda.weather.exceptions;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,6 +52,18 @@ public class ExceptionHandlerController {
     @ExceptionHandler(JsonDataProcessingErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     void jsonDataProcessingErrorHandler(JsonDataProcessingErrorException exception) {
+        log.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(ForecastFetchError.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    void forecastFetchErrorHandler(ForecastFetchError exception) {
+        log.error(exception.getMessage());
+    }
+
+    @ExceptionHandler(WindMapperException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    void forecastFetchErrorHandler(WindMapperException exception) {
         log.error(exception.getMessage());
     }
 
