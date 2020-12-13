@@ -23,7 +23,7 @@ public class SecurityUser implements UserDetails {
     private Long id;
     private String password;
     private String username;
-    private String authorities;
+    private String authorities; //"ROLE_USER;"EMAIL_SENDER" - średnik jako delimiter
 
     public List<GrantedAuthority> getAuthorities() {
         return Arrays.stream(authorities.split(";"))

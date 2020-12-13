@@ -40,7 +40,6 @@ public class CounterController {
         cookie.setMaxAge(5);
         response.addCookie(cookie);
 
-        counter++;
         return Map.of("counter", counter);
     }
 

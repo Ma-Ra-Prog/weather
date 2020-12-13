@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class LocalizationController {
     private final LocalizationFetchService localizationFetchService;
     private final LocalizationMapper localizationMapper;
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/localization")
     ResponseEntity<LocalizationDto> createLocalisation(@RequestBody LocalizationDto localisationDto) {
         LocalizationDefinition localizationDefinition = localizationMapper.mapToLocalizationDefinition(localisationDto);
